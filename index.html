@@ -1874,6 +1874,12 @@
                 <div class="ratio-card" data-val="2:3"><div class="icon-box icon-2-3"></div><span class="ratio-text">2:3</span></div>
                 <div class="ratio-card" data-val="9:16"><div class="icon-box icon-9-16"></div><span class="ratio-text">9:16</span></div>
             </div>
+            <label class="config-label">数据管理</label>
+            <div style="display: flex; gap: 10px; margin-bottom: 24px;">
+                <button class="config-btn" onclick="exportData()">导出数据</button>
+                <button class="config-btn" onclick="importData()">导入数据</button>
+                <input type="file" id="import-file" style="display: none;" accept=".json" onchange="handleImportFile(this)">
+            </div>
         </div>
     </aside>
 
@@ -3578,6 +3584,131 @@
     async function handleFiles(files){if(state.images.length+files.length>14){alert("最多14张");return}for(let file of files){if(!file.type.startsWith('image/'))continue;state.images.push(await compressImage(file))}renderPreviews();checkInput();UI.fileInput.value=''}
     function compressImage(file){return new Promise((resolve)=>{const reader=new FileReader();reader.readAsDataURL(file);reader.onload=(e)=>{const img=new Image();img.src=e.target.result;img.onload=()=>{let w=img.width,h=img.height,max=1536;if(file.size<1024*1024&&w<max&&h<max){resolve({base64:e.target.result.split(',')[1],mimeType:file.type,preview:e.target.result});return}if(w>h){if(w>max){h*=max/w;w=max}}else{if(h>max){w*=max/h;h=max}}const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);const dataUrl=canvas.toDataURL('image/jpeg',0.85);resolve({base64:dataUrl.split(',')[1],mimeType:'image/jpeg',preview:dataUrl})}}})}
     function renderPreviews(){UI.previewArea.innerHTML='';if(state.images.length>0){UI.previewArea.classList.add('has-images');state.images.forEach((img,i)=>{const div=document.createElement('div');div.className='preview-item';div.style.backgroundImage=`url(${img.preview})`;div.innerHTML=`<div class="preview-close" onclick="state.images.splice(${i},1);renderPreviews();checkInput()">×</div>`;UI.previewArea.appendChild(div)})}else UI.previewArea.classList.remove('has-images')}
+    
+    // 数据导入导出功能
+    async function exportData() {
+        const data = {
+            settings: {},
+            sessions: [],
+            messages: [],
+            xhsHistory: []
+        };
+        
+        // 收集localStorage设置数据
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            data.settings[key] = localStorage.getItem(key);
+        }
+        
+        // 收集IndexedDB会话数据
+        const tx = db.transaction(['sessions', 'messages'], 'readonly');
+        const sessionsStore = tx.objectStore('sessions');
+        const messagesStore = tx.objectStore('messages');
+        
+        data.sessions = await new Promise(resolve => {
+            const req = sessionsStore.getAll();
+            req.onsuccess = () => resolve(req.result || []);
+        });
+        
+        data.messages = await new Promise(resolve => {
+            const req = messagesStore.getAll();
+            req.onsuccess = () => resolve(req.result || []);
+        });
+        
+        // 收集XHS历史数据
+        try {
+            data.xhsHistory = await XHSDb.getAll();
+        } catch (error) {
+            console.warn('无法导出XHS历史数据:', error);
+            data.xhsHistory = [];
+        }
+        
+        // 下载JSON文件
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'gemini-data.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        showToast('数据导出完成', 'success');
+    }
+    
+    function importData() {
+        document.getElementById('import-file').click();
+    }
+    
+    async function handleImportFile(input) {
+        const file = input.files[0];
+        if (!file) return;
+        
+        try {
+            const text = await file.text();
+            const data = JSON.parse(text);
+            
+            // 导入设置数据到localStorage
+            if (data.settings) {
+                for (const key in data.settings) {
+                    localStorage.setItem(key, data.settings[key]);
+                }
+            }
+            
+            // 导入会话数据到IndexedDB
+            const tx = db.transaction(['sessions', 'messages'], 'readwrite');
+            const sessionsStore = tx.objectStore('sessions');
+            const messagesStore = tx.objectStore('messages');
+            
+            // 清空现有数据
+            await new Promise(resolve => {
+                let count = 0;
+                const checkDone = () => {
+                    count++;
+                    if (count === 2) resolve();
+                };
+                sessionsStore.clear().onsuccess = checkDone;
+                messagesStore.clear().onsuccess = checkDone;
+            });
+            
+            // 添加新数据
+            if (data.sessions) {
+                for (const session of data.sessions) {
+                    sessionsStore.add(session);
+                }
+            }
+            if (data.messages) {
+                for (const message of data.messages) {
+                    messagesStore.add(message);
+                }
+            }
+            
+            await new Promise(resolve => {
+                tx.oncomplete = () => resolve();
+            });
+            
+            // 导入XHS历史数据
+            if (data.xhsHistory) {
+                try {
+                    await XHSDb.clear();
+                    for (const item of data.xhsHistory) {
+                        await XHSDb.add(item);
+                    }
+                } catch (error) {
+                    console.warn('无法导入XHS历史数据:', error);
+                }
+            }
+            
+            showToast('数据导入完成，页面将刷新', 'success');
+            setTimeout(() => location.reload(), 1000);
+            
+        } catch (error) {
+            console.error('导入失败:', error);
+            showToast('导入失败，请检查文件格式', 'error');
+        }
+        
+        // 重置input
+        input.value = '';
+    }
 </script>
 </body>
 </html>
