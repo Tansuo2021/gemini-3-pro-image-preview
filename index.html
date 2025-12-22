@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -792,6 +793,14 @@
             color: var(--text-main) !important; 
         }
         
+        [data-theme="dark"] .xhs-history-del { 
+            color: var(--text-sub) !important; 
+        }
+        
+        [data-theme="dark"] .xhs-history-del:hover { 
+            background: var(--hover-color) !important; 
+            color: #ff6b6b !important; 
+        }
         /* 小红书模态框标题 */
         [data-theme="dark"] .xhs-modal-title { 
             color: var(--text-main) !important; 
@@ -996,7 +1005,7 @@
 
         .chat-container {
             flex: 1; overflow-y: auto; padding: 20px 0 100px 0; display: flex; flex-direction: column; align-items: center;
-            scroll-behavior: smooth; width: 100%; -webkit-overflow-scrolling: touch;
+            scroll-behavior: auto; width: 100%; -webkit-overflow-scrolling: touch;
         }
         .message-row { width: 100%; max-width: var(--content-max-width); padding: 0 24px; margin-bottom: 24px; display: flex; flex-direction: column; flex-shrink: 0; }
         .message-bubble-container { display: flex; width: 100%; }
@@ -1169,10 +1178,13 @@
         .xhs-save-btn { width: 100%; padding: 8px; background: #1a73e8; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
         .xhs-save-btn:hover { background: #1557b0; }
 
-        .xhs-history-item { padding: 10px; border-radius: 8px; cursor: pointer; margin-bottom: 6px; transition: all 0.2s; border: 1px solid transparent; }
+        .xhs-history-item { padding: 10px; border-radius: 8px; margin-bottom: 6px; transition: all 0.2s; border: 1px solid transparent; }
         .xhs-history-item:hover { background: #e8f0fe; border-color: #d2e3fc; }
         .xhs-h-title { font-size: 13px; font-weight: 500; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .xhs-h-date { font-size: 11px; color: #888; margin-top: 4px; }
+        .xhs-history-del { flex-shrink: 0; color: #5f6368; padding: 4px; border-radius: 4px; font-size: 16px; line-height: 1; cursor: pointer; transition: all 0.2s; opacity: 0; }
+        .xhs-history-item:hover .xhs-history-del { opacity: 1; }
+        .xhs-history-del:hover { background: #dadce0; color: #d93025; }
 
         /* 2. 中间创作区 */
         .xhs-middle { flex: 4; min-width: 340px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; }
@@ -1531,14 +1543,14 @@
         .banana-tag.mode-edit { background: rgba(168, 85, 247, 0.8); text-transform: uppercase; font-weight: 700; }
 
         .banana-content { padding: 16px; flex: 1; display: flex; flex-direction: column; }
-        .banana-title { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;}
+        .banana-title { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 8px; line-clamp: 1; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;}
         .banana-prompt-box {
             background: #f8fafc; border-radius: 6px; padding: 8px; margin-bottom: 12px;
             flex: 1; cursor: pointer; position: relative; border: 1px solid transparent;
         }
         .banana-prompt-box:hover { border-color: #e2e8f0; background: #fff; }
         .banana-prompt-text {
-            font-size: 12px; color: #475569; font-family: monospace; line-height: 1.5;
+            font-size: 12px; color: #475569; font-family: monospace; line-height: 1.5; line-clamp: 3;
             display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
         }
         .banana-prompt-tip {
@@ -1548,7 +1560,7 @@
         .banana-prompt-box:hover .banana-prompt-tip { opacity: 1; }
         .banana-prompt-tip span { background: #fff; padding: 4px 8px; border-radius: 4px; font-size: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 
-        .banana-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; pt-2; border-top: 1px solid #f1f5f9; padding-top: 8px;}
+        .banana-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 8px; border-top: 1px solid #f1f5f9; }
         .banana-author { font-size: 11px; color: #94a3b8; display: flex; align-items: center; gap: 4px; }
         .banana-actions { display: flex; gap: 8px; }
         .banana-icon-btn {
@@ -1719,6 +1731,37 @@
             .xhs-input-card { padding: 20px; }
             .banana-grid { grid-template-columns: 1fr; }
         }
+
+        .scroll-to-bottom-btn {
+            position: absolute;
+            top: -70px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.2s;
+            pointer-events: auto;
+        }
+        .scroll-to-bottom-btn:hover {
+            background: #1557b0;
+            transform: scale(1.1);
+        }
+        [data-theme="dark"] .scroll-to-bottom-btn {
+            background: var(--primary-color);
+        }
+        [data-theme="dark"] .scroll-to-bottom-btn:hover {
+            background: #6fa8dc;
+        }
     </style>
 </head>
 <body>
@@ -1786,6 +1829,7 @@
         </div>
 
         <div class="input-container-outer">
+            <div id="scroll-to-bottom-btn" class="scroll-to-bottom-btn" onclick="scrollToBottom()">↓</div>
             <div class="preview-area" id="preview-area"></div>
             <div class="input-wrapper">
                 <div class="icon-btn" title="上传参考图" onclick="document.getElementById('file-input').click()">
@@ -1873,6 +1917,12 @@
                 <div class="ratio-card" data-val="3:4"><div class="icon-box icon-3-4"></div><span class="ratio-text">3:4</span></div>
                 <div class="ratio-card" data-val="2:3"><div class="icon-box icon-2-3"></div><span class="ratio-text">2:3</span></div>
                 <div class="ratio-card" data-val="9:16"><div class="icon-box icon-9-16"></div><span class="ratio-text">9:16</span></div>
+            </div>
+            <label class="config-label">数据管理</label>
+            <div style="display: flex; gap: 10px; margin-bottom: 24px;">
+                <button class="config-btn" onclick="exportData()">导出数据</button>
+                <button class="config-btn" onclick="importData()">导入数据</button>
+                <input type="file" id="import-file" style="display: none;" accept=".json" onchange="handleImportFile(this)">
             </div>
         </div>
     </aside>
@@ -2516,8 +2566,9 @@
         removeImg(i) { this.refImages.splice(i, 1); this.renderPreviews(); },
 
         async saveToHistory(data) { const entry = { id: data.id || Date.now(), timestamp: new Date().toLocaleString(), title: data.title, data: data }; await XHSDb.add(entry); this.renderHistory(); },
-        async renderHistory() { const listEl = document.getElementById('xhs-history-list'); if (!listEl) return; const history = await XHSDb.getAll(); if (history.length === 0) { listEl.innerHTML = '<div style="text-align:center;color:#999;font-size:12px;margin-top:20px">暂无记录</div>'; return; } listEl.innerHTML = history.map(item => `<div class="xhs-history-item" onclick="XHSCreator.loadFromHistory(${item.id})"><div class="xhs-h-title">${escapeHtml(item.title)}</div><div class="xhs-h-date">${item.timestamp}</div></div>`).join(''); },
+        async renderHistory() { const listEl = document.getElementById('xhs-history-list'); if (!listEl) return; const history = await XHSDb.getAll(); if (history.length === 0) { listEl.innerHTML = '<div style="text-align:center;color:#999;font-size:12px;margin-top:20px">暂无记录</div>'; return; } listEl.innerHTML = history.map(item => `<div class="xhs-history-item"><div style="display:flex;justify-content:space-between;align-items:center;width:100%;gap:8px;"><div style="flex:1;cursor:pointer;min-width:0;" onclick="XHSCreator.loadFromHistory(${item.id})"><div class="xhs-h-title">${escapeHtml(item.title)}</div><div class="xhs-h-date">${item.timestamp}</div></div><div class="xhs-history-del" onclick="event.stopPropagation(); XHSCreator.removeFromHistory(${item.id})">×</div></div></div>`).join(''); },
         async loadFromHistory(id) { const history = await XHSDb.getAll(); const item = history.find(i => i.id === id); if (item) { this.outlineData = item.data; if(!this.outlineData.id) this.outlineData.id = item.id; this.isHistoryLoad = true; this.renderOutline(); } },
+        async removeFromHistory(id) { if (confirm('确定要删除该条记录吗？')) { await XHSDb.delete(id); this.renderHistory(); } },
         async clearHistory() { if (confirm('清空所有记录？')) { await XHSDb.clear(); this.renderHistory(); } },
 
         copyContent(type) { if(!this.outlineData) return; navigator.clipboard.writeText(type === 'title' ? this.outlineData.title : this.outlineData.content).then(() => showToast('已复制')); },
@@ -3066,7 +3117,8 @@
     function initDB(){return new Promise((resolve,reject)=>{const request=indexedDB.open(DB_NAME,DB_VERSION);request.onupgradeneeded=(e)=>{const db=e.target.result;if(!db.objectStoreNames.contains('sessions'))db.createObjectStore('sessions',{keyPath:'id'});if(!db.objectStoreNames.contains('messages')){const msgStore=db.createObjectStore('messages',{keyPath:'id',autoIncrement:true});msgStore.createIndex('sessionId','sessionId',{unique:false})}};request.onsuccess=(e)=>{db=e.target.result;resolve(db)};request.onerror=(e)=>reject(e)})}
     async function getAllSessions(){return new Promise((resolve)=>{const tx=db.transaction('sessions','readonly');const req=tx.objectStore('sessions').getAll();req.onsuccess=()=>resolve(req.result.sort((a,b)=>b.id-a.id))})}
     async function getSessionMessages(sessionId){return new Promise((resolve)=>{const tx=db.transaction('messages','readonly');const index=tx.objectStore('messages').index('sessionId');const req=index.getAll(sessionId);req.onsuccess=()=>resolve(req.result)})}
-    async function saveMessage(sessionId,role,content,images=[],rawHtml=null){return new Promise((resolve)=>{const tx=db.transaction('messages','readwrite');const req=tx.objectStore('messages').add({sessionId,role,content,images,rawHtml,timestamp:Date.now()});req.onsuccess=()=>resolve()})}
+    async function saveMessage(sessionId,role,content,images=[],rawHtml=null){return new Promise((resolve,reject)=>{const tx=db.transaction('messages','readwrite');const req=tx.objectStore('messages').add({sessionId,role,content,images,rawHtml,timestamp:Date.now()});let msgId;req.onsuccess=()=>{msgId=req.result};tx.oncomplete=()=>{resolve(msgId)};tx.onerror=()=>{reject(tx.error)}})}
+    async function deleteMessage(messageId){return new Promise((resolve,reject)=>{try{const tx=db.transaction('messages','readwrite');const store=tx.objectStore('messages');store.delete(messageId);tx.oncomplete=()=>{console.log('Message deleted:', messageId);resolve()};tx.onerror=()=>{console.error('Delete error:', tx.error);reject(tx.error)}}catch(e){console.error('Delete exception:', e);reject(e)}})}
     async function createSession(title="新对话"){const id=Date.now();const tx=db.transaction('sessions','readwrite');tx.objectStore('sessions').add({id,title,timestamp:id});return id}
     async function deleteSession(sessionId){const tx=db.transaction(['sessions','messages'],'readwrite');tx.objectStore('sessions').delete(sessionId);const index=tx.objectStore('messages').index('sessionId');index.openCursor(IDBKeyRange.only(sessionId)).onsuccess=(e)=>{const cursor=e.target.result;if(cursor){cursor.delete();cursor.continue()}};return new Promise(resolve=>tx.oncomplete=resolve)}
     async function updateSessionTitle(sessionId,title){const tx=db.transaction('sessions','readwrite');const store=tx.objectStore('sessions');store.get(sessionId).onsuccess=(e)=>{const data=e.target.result;if(data){data.title=title;store.put(data)}}}
@@ -3092,19 +3144,33 @@
     
     window.onload=async()=>{ProviderManager.init();XHSCreator.init();SlicerTool.init();BananaTool.init();await initDB();await renderSessionList();const sessions=await getAllSessions();if(sessions.length>0)await loadSession(sessions[0].id);else await createNewSession();const streamToggle=document.getElementById('stream-toggle');if(streamToggle){streamToggle.checked=localStorage.getItem('use_streaming')==='true';state.useStreaming=streamToggle.checked;streamToggle.addEventListener('change',()=>{state.useStreaming=streamToggle.checked;localStorage.setItem('use_streaming',streamToggle.checked)})}};
     
+    function scrollToBottom() {
+        UI.chatHistory.scrollTo({ top: UI.chatHistory.scrollHeight, behavior: 'smooth' });
+    }
+    
+    UI.chatHistory.addEventListener('scroll', function() {
+        const threshold = 100; // 距离底部100px
+        if (UI.chatHistory.scrollTop + UI.chatHistory.clientHeight < UI.chatHistory.scrollHeight - threshold) {
+            document.getElementById('scroll-to-bottom-btn').style.display = 'flex';
+        } else {
+            document.getElementById('scroll-to-bottom-btn').style.display = 'none';
+        }
+    });
+    
     function activateStickerMode(){createNewSession("表情包制作").then(()=>{const stickerPrompt="为我生成图中角色的绘制 Q 版的，LINE 风格的半身像表情包，注意头饰要正确\n彩色手绘风格，使用 4x6 布局，涵盖各种各样的常用聊天语句，或是一些有关的娱乐 meme\n其他需求：不要原图复制。所有标注为手写简体中文。";UI.textarea.value=stickerPrompt;state.resolution='4K';document.querySelectorAll('.res-btn').forEach(b=>b.classList.remove('active'));document.querySelector('.res-btn[data-val="4K"]').classList.add('active');state.aspectRatio='16:9';document.querySelectorAll('.ratio-card').forEach(c=>c.classList.remove('active'));document.querySelector('.ratio-card[data-val="16:9"]').classList.add('active');alert("已进入表情包模式！\n请点击输入框左侧图标上传一张角色参考图，然后点击发送。");adjustTextareaHeight();checkInput();if(window.innerWidth<=768)closeAllSidebars()})}
     
     async function renderSessionList(){const sessions=await getAllSessions();UI.sessionList.innerHTML='';sessions.forEach(s=>{const div=document.createElement('div');div.className=`session-item ${s.id===currentSessionId?'active':''}`;if(activeGenerations.has(s.id))div.classList.add('generating');div.innerHTML=`<div style="display:flex; align-items:center; overflow:hidden; width:100%;"><span class="session-loading">⏳</span><span style="overflow:hidden; text-overflow:ellipsis;">${escapeHtml(s.title)}</span></div><div class="session-delete" onclick="event.stopPropagation(); removeSession(${s.id})">×</div>`;div.onclick=()=>loadSession(s.id);UI.sessionList.appendChild(div)})}
     
-    async function loadSession(sessionId){currentSessionId=sessionId;UI.chatHistory.innerHTML='';UI.emptyState.style.display='none';BlobManager.cleanup();renderSessionList();const messages=await getSessionMessages(sessionId);if(messages.length===0){UI.chatHistory.appendChild(UI.emptyState);UI.emptyState.style.display='flex'}else{messages.forEach(msg=>appendMessageToUI(msg.role,msg.rawHtml,msg.content,msg.images));UI.chatHistory.scrollTop=UI.chatHistory.scrollHeight}if(activeGenerations.has(sessionId))appendMessageToUI('bot','<div class="loading-spinner" id="temp-loading" style="margin-left:20px;"></div>');if(window.innerWidth<=768)closeAllSidebars()}
+    async function loadSession(sessionId){currentSessionId=sessionId;UI.chatHistory.innerHTML='';UI.emptyState.style.display='none';BlobManager.cleanup();renderSessionList();const messages=await getSessionMessages(sessionId);if(messages.length===0){UI.chatHistory.appendChild(UI.emptyState);UI.emptyState.style.display='flex'}else{messages.forEach(msg=>appendMessageToUI(msg.role,msg.rawHtml,msg.content,msg.images,false,msg.id));const images=UI.chatHistory.querySelectorAll('img');if(images.length>0){let loadedCount=0;const checkScroll=()=>{loadedCount++;if(loadedCount===images.length){UI.chatHistory.scrollTop=UI.chatHistory.scrollHeight}};images.forEach(img=>{if(img.complete)checkScroll();else{img.onload=checkScroll;img.onerror=checkScroll}})}else{UI.chatHistory.scrollTop=UI.chatHistory.scrollHeight}}if(activeGenerations.has(sessionId))appendMessageToUI('bot','<div class="loading-spinner" id="temp-loading" style="margin-left:20px;"></div>',null,[],false);if(window.innerWidth<=768)closeAllSidebars();}
     async function createNewSession(title="新对话"){const id=await createSession(title);await loadSession(id)}
     async function removeSession(id){if(!confirm('确定删除此对话？'))return;await deleteSession(id);if(id===currentSessionId){const sessions=await getAllSessions();if(sessions.length>0)await loadSession(sessions[0].id);else await createNewSession()}else{renderSessionList()}}
     
     function useAsReference(base64){const mime="image/jpeg";const fullB64=base64.startsWith('data:')?base64:`data:${mime};base64,${base64}`;const rawBase64=fullB64.split(',')[1];state.images.push({base64:rawBase64,mimeType:mime,preview:base64ToBlobUrl(fullB64)});renderPreviews();checkInput();UI.textarea.focus();window.scrollTo(0,document.body.scrollHeight)}
     
-    function appendMessageToUI(role, html, rawText = null, rawImages = []) {
+    function appendMessageToUI(role, html, rawText = null, rawImages = [], shouldScroll = true, messageId = null) {
         const div = document.createElement('div');
         div.className = `message-row ${role}`;
+        if(messageId) div.setAttribute('data-id', messageId);
         let finalContentHtml = html;
         if (role === 'bot') { finalContentHtml = `<div style="display:flex; flex-direction:column; width:100%; align-items:flex-start;">${html}</div>`; }
         let finalHtml = `<div class="message-bubble-container">${finalContentHtml}</div>`;
@@ -3118,16 +3184,20 @@
                 imgGridHtml += `</div>`; finalHtml = `<div style="display:flex; flex-direction:column; align-items:flex-end; width:100%">${imgGridHtml}${finalHtml}</div>`;
             }
             const escapedRawText = rawText ? escapeHtml(rawText) : '';
-            let actionsHtml = `<div class="msg-actions"><div class="action-btn" onclick="copyText(this)" data-text="${escapedRawText}"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> 复制</div><div class="action-btn" onclick='handleEdit(${JSON.stringify(rawText||"")}, ${JSON.stringify(rawImages||[])})'><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> 编辑</div><div class="action-btn" onclick='handleRegenerate(${JSON.stringify(rawText||"")}, ${JSON.stringify(rawImages||[])})'><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg> 重新生成</div></div>`;
+            let actionsHtml = `<div class="msg-actions"><div class="action-btn" onclick="copyText(this)" data-text="${escapedRawText}"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> 复制</div><div class="action-btn" onclick='handleEdit(${JSON.stringify(rawText||"")}, ${JSON.stringify(rawImages||[])})'><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> 编辑</div><div class="action-btn" onclick='handleRegenerate(${JSON.stringify(rawText||"")}, ${JSON.stringify(rawImages||[])})'><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg> 重新生成</div><div class="action-btn" onclick='deleteMessageFromUI(this)' style="color:#d93025;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> 删除</div></div>`;
             finalHtml += actionsHtml;
+        } else if (role === 'bot' && messageId) {
+            let deleteHtml = `<div class="msg-actions"><div class="action-btn" onclick='deleteMessageFromUI(this)' style="color:#d93025;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> 删除</div></div>`;
+            finalHtml += deleteHtml;
         }
-        div.innerHTML = finalHtml; div.querySelectorAll('img.generated-image').forEach(img => img.onclick = () => openLightbox(img.src)); UI.chatHistory.appendChild(div); UI.chatHistory.scrollTop = UI.chatHistory.scrollHeight; return div;
+        div.innerHTML = finalHtml; div.querySelectorAll('img.generated-image').forEach(img => img.onclick = () => openLightbox(img.src)); UI.chatHistory.appendChild(div); if(shouldScroll) UI.chatHistory.scrollTop = UI.chatHistory.scrollHeight; return div;
     }
 
     function copyText(btn){navigator.clipboard.writeText(btn.getAttribute('data-text')).then(()=>{const original=btn.innerHTML;btn.innerHTML='<span>已复制</span>';setTimeout(()=>btn.innerHTML=original,1500)})}
     function adjustTextareaHeight(){UI.textarea.style.height='auto';const maxHeight=150;const scrollHeight=UI.textarea.scrollHeight;if(scrollHeight>maxHeight){UI.textarea.style.height=maxHeight+'px';UI.textarea.style.overflowY='auto'}else{UI.textarea.style.height=scrollHeight+'px';UI.textarea.style.overflowY='hidden'}}
     function handleEdit(text,imagesBase64){ UI.textarea.value=text;state.images=[]; if(imagesBase64){ imagesBase64.forEach(b64=>{ const fullB64 = b64.startsWith('data:') ? b64 : `data:image/jpeg;base64,${b64}`; const raw = b64.startsWith('data:') ? b64.split(',')[1] : b64; state.images.push({base64:raw, mimeType:"image/jpeg", preview:base64ToBlobUrl(fullB64)}); }); } renderPreviews();checkInput();adjustTextareaHeight();UI.textarea.focus();UI.textarea.scrollTop=UI.textarea.scrollHeight }
     function handleRegenerate(text,imagesBase64){handleEdit(text,imagesBase64);sendMessage()}
+    async function deleteMessageFromUI(btn) { const msgRow = btn.closest('.message-row'); let msgId = msgRow?.getAttribute('data-id'); console.log('Deleting message ID:', msgId); if(!msgId) { alert('消息ID丢失，无法删除'); return; } msgId = Number(msgId); if(!confirm('确定删除此消息？')) return; try { await deleteMessage(msgId); msgRow.remove(); } catch(e) { alert('删除失败: ' + e.message); } }
     
     async function sendMessage(){
         if(!currentSessionId)await createNewSession();
@@ -3137,7 +3207,7 @@
         let userHtml = ""; if(text) userHtml+=`<div class="msg-content">${escapeHtml(text).replace(/\n/g,'<br>')}</div>`;
         const currentImagesBase64 = state.images.map(i => i.base64); const currentText = text; const thisSessionId = currentSessionId;
         UI.textarea.value=''; UI.textarea.style.height='24px'; state.images=[]; renderPreviews(); checkInput();
-        appendMessageToUI('user', userHtml, currentText, currentImagesBase64); await saveMessage(thisSessionId, 'user', currentText, currentImagesBase64, userHtml);
+        let userMsgDiv = appendMessageToUI('user', userHtml, currentText, currentImagesBase64); const userMsgId = await saveMessage(thisSessionId, 'user', currentText, currentImagesBase64, userHtml); if(userMsgDiv) userMsgDiv.setAttribute('data-id', userMsgId);
         const msgs = await getSessionMessages(thisSessionId); if(msgs.length<=1 && currentText){ const newTitle = currentText.substring(0, 20) + (currentText.length>20?'...':''); updateSessionTitle(thisSessionId, newTitle); renderSessionList(); }
         let loadingDiv=null; if(thisSessionId===currentSessionId){ const loadingHtml='<div class="loading-spinner" style="margin-left:20px;"></div>'; loadingDiv=appendMessageToUI('bot',loadingHtml); } activeGenerations.add(thisSessionId); renderSessionList(); processGeneration(config, currentText, currentImagesBase64, loadingDiv, thisSessionId);
     }
@@ -3260,7 +3330,7 @@
                         if(fullText) {
                             const finalHtml = `<div class="msg-content" style="padding:12px 18px; white-space:pre-wrap; line-height:1.6;">${escapeHtml(fullText)}</div>`;
                             streamTextDiv.querySelector('.msg-content').innerHTML = finalHtml.replace(/<div class="msg-content"[^>]*>|<\/div>$/g, '');
-                            await saveMessage(sessionId,'bot',fullText,[],streamTextDiv.innerHTML);
+                            const msgId = await saveMessage(sessionId,'bot',fullText,[],streamTextDiv.innerHTML); streamTextDiv.setAttribute('data-id', msgId);
                         } else {
                             streamTextDiv.remove();
                         }
@@ -3312,19 +3382,19 @@
                             const textHtml = `<div class="msg-content" style="padding:12px 18px; white-space:pre-wrap; line-height:1.6;">${escapeHtml(cleanText)}</div>`;
                             const combinedHtml = textHtml + botInnerHtml;
                             streamTextDiv.remove();
-                            await saveMessage(sessionId,'bot','Text and Image',[],combinedHtml); 
+                            const msgId = await saveMessage(sessionId,'bot','Text and Image',[],combinedHtml); 
                             if(sessionId===currentSessionId){ 
                                 if(loadingDiv)loadingDiv.remove(); 
                                 const tempLoading=document.getElementById('temp-loading'); 
                                 if(tempLoading)tempLoading.parentElement.remove(); 
-                                appendMessageToUI('bot',combinedHtml);
+                                appendMessageToUI('bot',combinedHtml,null,[],true,msgId);
                             }
                             return;
                         }
                     }
                     streamTextDiv.remove();
                 }
-                await saveMessage(sessionId,'bot','Image Generated',[],botInnerHtml); 
+                const msgId = await saveMessage(sessionId,'bot','Image Generated',[],botInnerHtml); 
                 if(sessionId===currentSessionId){ 
                     if(loadingDiv)loadingDiv.remove(); 
                     const tempLoading=document.getElementById('temp-loading'); 
@@ -3335,10 +3405,10 @@
                             spinner.parentElement.remove();
                         }
                     });
-                    appendMessageToUI('bot',botInnerHtml);
+                    appendMessageToUI('bot',botInnerHtml,null,[],true,msgId);
                 } 
             }
-        }catch(e){ activeGenerations.delete(sessionId); renderSessionList(); let msg=e.message; try{const jsonErr=JSON.parse(e.message);if(jsonErr.error&&jsonErr.error.message)msg=jsonErr.error.message}catch(_){} const errorHtml=`<div class="msg-content" style="color:#d93025">❌ Error: ${escapeHtml(msg)}</div>`; await saveMessage(sessionId,'bot','Error',[],errorHtml); if(sessionId===currentSessionId){ if(loadingDiv)loadingDiv.remove(); appendMessageToUI('bot',errorHtml) } }
+        }catch(e){ activeGenerations.delete(sessionId); renderSessionList(); let msg=e.message; try{const jsonErr=JSON.parse(e.message);if(jsonErr.error&&jsonErr.error.message)msg=jsonErr.error.message}catch(_){} const errorHtml=`<div class="msg-content" style="color:#d93025">❌ Error: ${escapeHtml(msg)}</div>`; const errorMsgId = await saveMessage(sessionId,'bot','Error',[],errorHtml); if(sessionId===currentSessionId){ if(loadingDiv)loadingDiv.remove(); appendMessageToUI('bot',errorHtml,null,[],true,errorMsgId) } }
     }
 
     async function parseStreamResponse(response, loadingDiv, sessionId) {
@@ -3578,6 +3648,131 @@
     async function handleFiles(files){if(state.images.length+files.length>14){alert("最多14张");return}for(let file of files){if(!file.type.startsWith('image/'))continue;state.images.push(await compressImage(file))}renderPreviews();checkInput();UI.fileInput.value=''}
     function compressImage(file){return new Promise((resolve)=>{const reader=new FileReader();reader.readAsDataURL(file);reader.onload=(e)=>{const img=new Image();img.src=e.target.result;img.onload=()=>{let w=img.width,h=img.height,max=1536;if(file.size<1024*1024&&w<max&&h<max){resolve({base64:e.target.result.split(',')[1],mimeType:file.type,preview:e.target.result});return}if(w>h){if(w>max){h*=max/w;w=max}}else{if(h>max){w*=max/h;h=max}}const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);const dataUrl=canvas.toDataURL('image/jpeg',0.85);resolve({base64:dataUrl.split(',')[1],mimeType:'image/jpeg',preview:dataUrl})}}})}
     function renderPreviews(){UI.previewArea.innerHTML='';if(state.images.length>0){UI.previewArea.classList.add('has-images');state.images.forEach((img,i)=>{const div=document.createElement('div');div.className='preview-item';div.style.backgroundImage=`url(${img.preview})`;div.innerHTML=`<div class="preview-close" onclick="state.images.splice(${i},1);renderPreviews();checkInput()">×</div>`;UI.previewArea.appendChild(div)})}else UI.previewArea.classList.remove('has-images')}
+    
+    // 数据导入导出功能
+    async function exportData() {
+        const data = {
+            settings: {},
+            sessions: [],
+            messages: [],
+            xhsHistory: []
+        };
+        
+        // 收集localStorage设置数据
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            data.settings[key] = localStorage.getItem(key);
+        }
+        
+        // 收集IndexedDB会话数据
+        const tx = db.transaction(['sessions', 'messages'], 'readonly');
+        const sessionsStore = tx.objectStore('sessions');
+        const messagesStore = tx.objectStore('messages');
+        
+        data.sessions = await new Promise(resolve => {
+            const req = sessionsStore.getAll();
+            req.onsuccess = () => resolve(req.result || []);
+        });
+        
+        data.messages = await new Promise(resolve => {
+            const req = messagesStore.getAll();
+            req.onsuccess = () => resolve(req.result || []);
+        });
+        
+        // 收集XHS历史数据
+        try {
+            data.xhsHistory = await XHSDb.getAll();
+        } catch (error) {
+            console.warn('无法导出XHS历史数据:', error);
+            data.xhsHistory = [];
+        }
+        
+        // 下载JSON文件
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'gemini-data.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        showToast('数据导出完成', 'success');
+    }
+    
+    function importData() {
+        document.getElementById('import-file').click();
+    }
+    
+    async function handleImportFile(input) {
+        const file = input.files[0];
+        if (!file) return;
+        
+        try {
+            const text = await file.text();
+            const data = JSON.parse(text);
+            
+            // 导入设置数据到localStorage
+            if (data.settings) {
+                for (const key in data.settings) {
+                    localStorage.setItem(key, data.settings[key]);
+                }
+            }
+            
+            // 导入会话数据到IndexedDB
+            const tx = db.transaction(['sessions', 'messages'], 'readwrite');
+            const sessionsStore = tx.objectStore('sessions');
+            const messagesStore = tx.objectStore('messages');
+            
+            // 清空现有数据
+            await new Promise(resolve => {
+                let count = 0;
+                const checkDone = () => {
+                    count++;
+                    if (count === 2) resolve();
+                };
+                sessionsStore.clear().onsuccess = checkDone;
+                messagesStore.clear().onsuccess = checkDone;
+            });
+            
+            // 添加新数据
+            if (data.sessions) {
+                for (const session of data.sessions) {
+                    sessionsStore.add(session);
+                }
+            }
+            if (data.messages) {
+                for (const message of data.messages) {
+                    messagesStore.add(message);
+                }
+            }
+            
+            await new Promise(resolve => {
+                tx.oncomplete = () => resolve();
+            });
+            
+            // 导入XHS历史数据
+            if (data.xhsHistory) {
+                try {
+                    await XHSDb.clear();
+                    for (const item of data.xhsHistory) {
+                        await XHSDb.add(item);
+                    }
+                } catch (error) {
+                    console.warn('无法导入XHS历史数据:', error);
+                }
+            }
+            
+            showToast('数据导入完成，页面将刷新', 'success');
+            setTimeout(() => location.reload(), 1000);
+            
+        } catch (error) {
+            console.error('导入失败:', error);
+            showToast('导入失败，请检查文件格式', 'error');
+        }
+        
+        // 重置input
+        input.value = '';
+    }
 </script>
 </body>
 </html>
