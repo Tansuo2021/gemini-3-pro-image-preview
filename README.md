@@ -21,11 +21,12 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
+</div>
+
 **🎨 强大的 Gemini 3 Pro 图像生成工作台**
 
 [在线演示](#) | [快速开始](#快速开始) | [功能特性](#功能特性) | [贡献指南](#贡献指南)
 
-</div>
 
 ---
 
