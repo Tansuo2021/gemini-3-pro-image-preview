@@ -1,334 +1,275 @@
-## 版本更新
-- 新增iOS应用端存储到相册功能，点击下载 到新页面长按保存图片
-<img width="664" height="1036" alt="image" src="https://github.com/user-attachments/assets/b56df154-c3d1-4e99-a043-c986c0b74d1a" />
-
-- 优化小红书提示词，出图更好看
-<img width="3154" height="1684" alt="image" src="https://github.com/user-attachments/assets/cf67cbbb-3dd7-4ea8-9a43-b06658510383" />
-
-- 增加流式接收
-<img width="650" height="406" alt="image" src="https://github.com/user-attachments/assets/b4164844-6183-4202-a55a-7784ee9a42a3" />
-
-- 细节优化 可以单纯文字输出 文字图片一同输出
+# Gemini 3 Pro Image Preview
 
 <div align="center">
 
-# 🎨 Gemini 3 Pro - 绘图工作台全能版
+![Gemini 3 Pro](https://img.shields.io/badge/Gemini-3%20Pro-blue?style=for-the-badge&logo=google)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-**一站式 AI 绘图解决方案 | 小红书创作神器 | 开箱即用**
+**🎨 强大的 Gemini 3 Pro 图像生成工作台**
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Tansuo2021/gemini-pro-workbench/pulls)
-
-[功能特性](#-核心特性) • [快速开始](#-快速开始) • [使用指南](#-使用指南) • [技术架构](#️-技术架构)
-
----
+[在线演示](#) | [快速开始](#快速开始) | [功能特性](#功能特性) | [贡献指南](#贡献指南)
 
 </div>
 
+---
+
 ## 📖 项目简介
 
-基于 **Gemini 3 Pro** 的多功能 AI 绘图工作台，集成小红书创作、提示词库、图片切割等实用工具。
+Gemini 3 Pro Image Preview 是一个基于 Google Gemini 3 Pro 模型的现代化图像生成工作台。它提供了直观的用户界面、强大的功能和出色的用户体验，支持多种图像生成场景和创作工具。
 
-**🌟 核心亮点：**
-- 🚀 **零配置启动** - 单 HTML 文件，双击即用
-- 🎯 **多 API 支持** - Gemini + OpenAI 兼容接口
-- 📱 **小红书专属** - 从文案到配图一站式解决
-- 🍌 **海量提示词** - 集成社区精选词库
-- ✂️ **图片工具** - 切片、九宫格、表情包制作
-- 🌓 **明暗主题** - 护眼模式，随心切换
-- 💾 **本地存储** - 隐私安全，数据不上传
+### ✨ 核心亮点
 
-## ✨ 核心特性
+- 🚀 **并发生成** - 支持批量并发生成图片，提高创作效率
+- 🎯 **4K 渲染** - 支持高达 4K 分辨率的图像生成
+- 💾 **本地存储** - 使用 IndexedDB 本地存储对话历史
+- 📱 **响应式设计** - 完美适配桌面端和移动端
+- 🌓 **暗黑模式** - 内置优雅的暗黑主题
+- 🔄 **对话上下文** - AI 可记住历史对话，实现连续创作
 
-### 🖼️ AI 绘图引擎
-- ✅ **多渠道管理** - 支持 Gemini 原生接口和 OpenAI 兼容接口
-- ✅ **智能轮询** - 随机优选模式，自动切换 API 渠道
-- ✅ **高清渲染** - 支持 1K/2K/4K 分辨率输出
-- ✅ **灵活比例** - 11 种长宽比预设（1:1, 16:9, 9:16, 3:4 等）
-- ✅ **参考图上传** - 支持多图上传（最多 14 张），智能压缩优化
-- ✅ **并发生成** - 多图同时生成，实时进度显示
-- ✅ **流式传输** - OpenAI 接口支持流式接收，实时查看生成过程
-- ✅ **拖拽上传** - 支持图片拖拽、粘贴上传，操作更便捷
+---
 
-### 📱 XHS 灵感实验室
-> 专为小红书内容创作者打造的 AI 助手
+## 🎯 功能特性
 
-- ✅ **智能策划** - 输入主题或上传图片，AI 自动生成小红书笔记方案
-- ✅ **分镜生成** - 自动规划多张配图的画面描述和提示词
-- ✅ **垫图功能** - 为每个分镜单独设置参考图，精准控制风格
-- ✅ **批量绘制** - 一键生成所有分镜图片，带进度条反馈
-- ✅ **历史记录** - IndexedDB 本地存储，随时查看和复用历史方案
-- ✅ **文案导出** - 支持复制标题、正文，快速发布到小红书
-- ✅ **自定义模型** - 支持添加自定义 AI 模型到快速选择列表
-- ✅ **三栏布局** - 配置、编辑、预览一目了然
+### 核心功能
 
-### 🍌 提示词快查工具
-> 集成社区精选提示词库，告别提示词荒
+#### 🖼️ 图像生成
+- **多分辨率支持**：1K / 2K / 4K 可选
+- **多种长宽比**：支持 1:1、16:9、9:16、3:4、4:3 等 11 种比例
+- **参考图上传**：支持上传参考图进行图像生成
+- **批量生成**：一次性生成多张图片
 
-- ✅ **海量词库** - 集成 [Banana Prompt](https://github.com/glidea/banana-prompt-quicker) 社区精选提示词
-- ✅ **分类筛选** - 绘图/生活/学习/工作/NSFW 多分类，快速定位需求
-- ✅ **实时搜索** - 支持标题、提示词、分类关键词搜索
-- ✅ **一键复制** - 点击即可复制提示词到剪贴板
-- ✅ **多源加载** - 自动尝试多个 CDN 源，确保数据可用
-- ✅ **卡片展示** - 预览图 + 标题 + 描述，直观易用
+#### 💬 对话管理
+- **会话持久化**：使用 IndexedDB 存储对话历史
+- **上下文记忆**：可配置保留 3/5/10/20 条历史对话
+- **会话切换**：快速切换不同的对话会话
+- **历史记录**：完整的对话历史记录
 
-### ✂️ 图片切割工厂
-> 专业的图片分割工具，支持九宫格和自由切割
+#### 🎨 创作工具
 
-- ✅ **自由切割** - 横线/竖线模式，拖拽调整切割位置
-- ✅ **九宫格** - 快速生成社交媒体九宫格图片
-- ✅ **1:1 补全** - 自动填充背景色，生成正方形切片
-- ✅ **批量下载** - 一键打包所有切片为 ZIP 文件
-- ✅ **表情包制作** - 配合 AI 生成，快速制作表情包矩阵
-- ✅ **实时预览** - 切割线可视化，所见即所得
+##### 📝 XHS 灵感实验室
+- 小红书风格内容创作
+- AI 生成文案和配图
+- 支持图片分析和文案生成
+- 批量生成分镜图片
 
-### 🎭 表情包模式
-> 一键生成 LINE 风格表情包矩阵
+##### 🍌 提示词快查
+- 集成 [Banana Prompt](https://github.com/glidea/banana-prompt-quicker) 提示词库
+- 快速搜索和使用优质提示词
+- 支持分类筛选（绘图/生活/学习/工作等）
 
-- ✅ **一键启动** - 自动配置 4K 分辨率 + 16:9 比例
-- ✅ **预设提示词** - 内置 LINE 风格 Q 版表情包生成模板
-- ✅ **4x6 布局** - 生成 24 个常用表情，覆盖日常聊天场景
-- ✅ **智能识别** - 自动识别角色特征，保持风格一致
+##### 📚 我的提示词
+- 管理个人提示词库
+- 添加、编辑、删除自定义提示词
+- 快速应用到对话中
 
-### 🌓 界面体验
-> 精心打磨的用户体验
+##### 😊 表情包制作
+- 一键进入表情包生成模式
+- 预设表情包生成参数
+- 支持 LINE 风格表情包
 
-- ✅ **明暗主题** - 支持明亮/暗黑模式切换，保护视力
-- ✅ **响应式设计** - 完美适配桌面端、平板、手机
-- ✅ **会话管理** - 本地存储对话历史，支持多会话切换
-- ✅ **实时反馈** - Toast 提示、进度条、加载动画
-- ✅ **错误处理** - 友好的错误提示和重试机制
-- ✅ **快捷操作** - 编辑、重新生成、复制等快捷按钮
+##### ✂️ 图片切片工具
+- 九宫格切图功能
+- 支持横线/竖线切割
+- 1:1 补全功能
+- 一键打包下载
+
+### 高级功能
+
+#### ⚙️ API 渠道管理
+- **多渠道支持**：支持配置多个 API 渠道
+- **随机轮询**：自动在多个渠道间轮询
+- **双接口支持**：
+  - Gemini 原生接口
+  - OpenAI 兼容接口
+- **渠道管理**：添加、编辑、删除 API 渠道
+
+#### 💾 自动保存
+- **File System Access API**：使用浏览器原生 API
+- **本地保存**：生成的图片自动保存到本地目录
+- **不占空间**：不占用浏览器存储空间
+- **浏览器要求**：Chrome 86+ / Edge 86+
+
+#### 🌐 流式传输
+- **OpenAI 流式接收**：支持流式接收 API 响应
+- **实时显示**：实时显示生成进度
+- **整体解析**：完整解析后显示图片
+
+---
 
 ## 🚀 快速开始
 
-### 方式一：直接使用（推荐）
+### 前置要求
 
-1. **下载文件**
-   ```bash
-   # 克隆仓库
-   git clone https://github.com/yourusername/gemini-pro-workbench.git
-   
-   # 或直接下载 HTML 文件
-   wget https://github.com/yourusername/gemini-pro-workbench/raw/main/Gemini-3-Pro-绘图工作台全能修复版-XHS-BananaPrompt.html
-   ```
+- 现代浏览器（Chrome 86+ / Edge 86+ / Firefox / Safari）
+- Gemini API Key 或兼容的 OpenAI API
 
-2. **打开文件**
-   - 双击 HTML 文件
-   - 或右键选择"使用浏览器打开"
-   - 推荐使用 Chrome/Edge/Firefox 最新版
+### 安装步骤
 
-3. **开始使用**
-   - 无需安装任何依赖
-   - 无需配置服务器
-   - 开箱即用！
-
-### 方式二：本地服务器（可选）
-
+1. **克隆仓库**
 ```bash
-# Python 3
+git clone https://github.com/Tansuo2021/gemini-3-pro-image-preview.git
+cd gemini-3-pro-image-preview
+```
+
+2. **启动本地服务器**
+```bash
+# 使用 Python
 python -m http.server 8000
 
-# Node.js
-npx http-server -p 8000
+# 或使用 Node.js
+npx serve
 
-# 访问 http://localhost:8000
+# 或使用 PHP
+php -S localhost:8000
 ```
+
+3. **打开浏览器**
+```
+http://localhost:8000
+```
+
+### 配置 API
+
+1. 点击右上角的 **设置** 图标
+2. 展开 **API 渠道管理**
+3. 填写以下信息：
+   - **渠道名称**：自定义名称（如：官方API）
+   - **接口类型**：选择 Gemini 原生接口 或 OpenAI 兼容接口
+   - **API Base URL**：API 地址
+   - **API Key**：你的 API 密钥
+   - **Model**：模型名称（如：gemini-3-pro-image-preview）
+4. 点击 **保存渠道**
 
 ---
 
-## ⚙️ API 配置
+## 📦 技术栈
 
-### 方法一：Gemini 原生接口
+- **前端框架**：原生 JavaScript（无框架依赖）
+- **样式**：CSS3 + CSS Variables
+- **存储**：IndexedDB
+- **文件系统**：File System Access API
+- **Markdown 解析**：marked.js
+- **文件压缩**：JSZip
 
-1. **获取 API Key**
-   - 访问 [Google AI Studio](https://makersuite.google.com/app/apikey)
-   - 创建 API Key
+---
 
-2. **配置渠道**
-   ```
-   渠道名称: Gemini 官方
-   接口类型: Gemini 原生接口
-   API Base URL: https://generativelanguage.googleapis.com
-   API Key: 你的 Gemini API Key
-   Model: gemini-3-pro-image-preview
-   ```
+## 📱 浏览器兼容性
 
-3. **保存配置**
-   - 点击右上角设置图标 ⚙️
-   - 展开「API 渠道管理」
-   - 填写上述信息
-   - 点击「保存渠道」
+| 浏览器 | 版本要求 | 核心功能 | 自动保存 |
+|--------|---------|---------|---------|
+| Chrome | 86+ | ✅ | ✅ |
+| Edge | 86+ | ✅ | ✅ |
+| Firefox | 最新版 | ✅ | ❌ |
+| Safari | iOS 14+ | ✅ | ❌ |
 
-### 方法二：OpenAI 兼容接口
+**注意**：自动保存功能需要 File System Access API 支持（Chrome/Edge 86+）
 
-支持任何 OpenAI 兼容的 API 服务：
+---
 
-```
-渠道名称: OpenAI / 其他服务
-接口类型: OpenAI 兼容接口
-API Base URL: https://api.openai.com (或其他兼容服务)
-API Key: 你的 API Key
-Model: gpt-4o (或其他支持图像生成的模型)
-```
+## 🎨 界面预览
 
-**支持的服务：**
-- OpenAI 官方
-- OpenRouter
-- Together AI
-- 各类中转服务
+### 桌面端
+- 三栏布局：侧边栏 + 主内容区 + 设置面板
+- 响应式设计，自动适配不同屏幕尺寸
 
-### 多渠道管理
+### 移动端
+- 优化的移动端布局
+- 侧边栏滑出设计
+- 触摸友好的交互
 
-**添加多个渠道作为备用：**
+### 暗黑模式
+- 一键切换暗黑/明亮主题
+- 自动保存主题偏好
+- 完整的暗黑模式适配
 
-1. 重复上述步骤添加多个渠道
-2. 在「当前使用渠道」下拉框选择：
-   - **🎲 随机优选** - 自动轮询所有渠道
-   - **指定渠道** - 使用特定渠道
+---
 
-**优势：**
-- ✅ 单个渠道失败自动切换
-- ✅ 提高生成成功率
-- ✅ 负载均衡，避免频率限制
+## 🔧 配置说明
 
-## 📖 使用指南
+### 分辨率设置
+- **1K**：1024x1024
+- **2K**：2048x2048
+- **4K**：4096x4096（默认）
 
-### 基础绘图
-1. 在底部输入框输入画面描述
-2. （可选）点击上传图标添加参考图
-3. 右侧设置分辨率和长宽比
-4. 点击发送按钮生成图片
-5. 生成后可下载、设为参考图或进行切割
+### 长宽比选项
+- Auto（自动）
+- 21:9（超宽屏）
+- 16:9（宽屏）
+- 3:2、4:3、5:4（横向）
+- 1:1（正方形）
+- 4:5、3:4、2:3、9:16（竖向）
 
-### XHS 创作流程
-1. 点击左侧「XHS 灵感实验室」
-2. 输入创作主题或上传参考图
-3. 设置需要生成的图片数量（1-9 张）
-4. 点击「生成方案」，AI 自动策划文案和分镜
-5. 查看右侧分镜列表，可编辑提示词或添加垫图
-6. 点击「批量生成」一键生成所有配图
-7. 复制文案，下载图片，发布到小红书
+### 对话上下文
+- **保留条数**：3 / 5（默认）/ 10 / 20 条
+- **功能**：AI 可基于历史对话和图片继续创作
+- **注意**：保留条数越多，消耗的 Token 越多
 
-### 图片切割
-1. 点击左侧「图片切片/九宫格」
-2. 上传需要切割的图片
-3. 选择横线或竖线模式
-4. 点击画布添加切割线，拖拽调整位置
-5. （可选）勾选「1:1 补全」生成正方形
-6. 点击「生成切片」
-7. 点击单个切片下载，或「一键打包下载」全部
-
-### 提示词查询
-1. 点击左侧「提示词快查」
-2. 使用搜索框或分类标签筛选
-3. 点击卡片复制提示词
-4. 返回主界面粘贴使用
-
-## 🛠️ 技术架构
-
-### 前端技术
-- **纯 HTML5** - 单文件应用，无需构建工具
-- **原生 JavaScript** - 无框架依赖，轻量高效
-- **CSS3 动画** - 流畅的交互体验
-- **响应式设计** - 完美适配桌面端和移动端
-
-### 数据存储
-- **LocalStorage** - API 配置、用户设置持久化
-- **IndexedDB** - XHS 历史记录、会话消息存储
-- **Blob URL** - 图片临时缓存，自动清理
-
-### 核心库
-- **Marked.js** - Markdown 渲染（XHS 文案预览）
-- **JSZip** - ZIP 打包（批量下载切片）
-
-### API 支持
-- **Gemini API** - 原生 `generateContent` 接口
-- **OpenAI Compatible API** - `/v1/chat/completions` 标准接口
-
-## 📱 响应式适配
-
-### 桌面端（≥1600px）
-- 三栏布局：侧边栏 + 主区域 + 设置栏
-- XHS 分镜 3 列网格展示
-- 完整功能面板
-
-### 平板端（768px - 1600px）
-- 两栏布局：主区域 + 可折叠侧边栏
-- XHS 分镜自适应列数
-- 触摸优化交互
-
-### 移动端（<768px）
-- 单栏布局：全屏主区域
-- 抽屉式侧边栏
-- XHS 分镜单列垂直排列
-- 大号触摸按钮
-
-## 🎨 界面特色
-
-### 设计语言
-- **Google Material Design** - 简洁现代的视觉风格
-- **渐变色彩** - 小红书红、香蕉黄等品牌色
-- **毛玻璃效果** - 半透明背景 + backdrop-filter
-- **微动画** - hover、active 状态的细腻反馈
-
-### 用户体验
-- **实时反馈** - Toast 提示、进度条、加载动画
-- **错误处理** - 友好的错误提示和重试机制
-- **快捷操作** - 编辑、重新生成、复制等快捷按钮
-- **无缝切换** - 会话历史、工具模式快速切换
-
-## 🔒 隐私安全
-
-- ✅ **本地优先** - 所有数据存储在浏览器本地
-- ✅ **无服务器** - 不依赖任何后端服务
-- ✅ **API 加密** - API Key 仅存储在 LocalStorage
-- ✅ **跨域安全** - 图片处理遵循 CORS 策略
-- ✅ **开源透明** - 代码完全开放，可自行审计
-
-## 🐛 已知问题
-
-- 部分浏览器可能不支持 `backdrop-filter`（毛玻璃效果）
-- 跨域图片无法直接切割（需下载后重新上传）
-- IndexedDB 在隐私模式下可能不可用
+---
 
 ## 🤝 贡献指南
 
-欢迎提交 Issue 和 Pull Request！
+欢迎贡献代码、报告问题或提出建议！
+
+### 贡献流程
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
 
 ### 开发建议
-1. 使用现代浏览器（Chrome/Edge/Firefox 最新版）
-2. 开启开发者工具查看控制台日志
-3. 修改代码后直接刷新页面测试
-4. 提交前确保代码格式统一
 
-### 功能建议
-- [ ] 支持更多 AI 模型（DALL-E, Midjourney 等）
-- [ ] 批量导出会话记录
-- [ ] 自定义提示词模板库
-- [ ] 图片编辑功能（裁剪、滤镜等）
-- [ ] 多语言支持
-
-## 📄 开源协议
-
-本项目采用 [MIT License](LICENSE) 开源协议。
-
-## 🙏 致谢
-
-- [Gemini API](https://ai.google.dev/) - 强大的多模态 AI 能力
-- [Banana Prompt](https://github.com/glidea/banana-prompt-quicker) - 优质提示词社区
-- [Marked.js](https://marked.js.org/) - Markdown 解析库
-- [JSZip](https://stuk.github.io/jszip/) - JavaScript ZIP 库
-
-## 📮 联系方式
-
-- **Issues**: [GitHub Issues](https://github.com/Tansuo2021//gemini-pro-workbench/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Tansuo2021//gemini-pro-workbench/discussions)
+- 遵循现有代码风格
+- 添加必要的注释
+- 测试你的更改
+- 更新相关文档
 
 ---
 
-**⭐ 如果这个项目对你有帮助，请给个 Star 支持一下！**
+## 📝 更新日志
 
-*Made with ❤️ by AI Enthusiasts*
+### v1.0.0 (2026-01-04)
+- ✨ 初始版本发布
+- 🎨 完整的图像生成功能
+- 💬 对话上下文支持
+- 🛠️ XHS 灵感实验室
+- 🍌 提示词快查工具
+- ✂️ 图片切片工具
+- 📱 移动端适配
+- 🌓 暗黑模式支持
+
+---
+
+## 📄 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+---
+
+## 🙏 致谢
+
+- [Google Gemini](https://deepmind.google/technologies/gemini/) - 强大的 AI 模型
+- [Banana Prompt](https://github.com/glidea/banana-prompt-quicker) - 优质提示词库
+- [marked.js](https://marked.js.org/) - Markdown 解析
+- [JSZip](https://stuk.github.io/jszip/) - 文件压缩
+
+---
+
+## 📮 联系方式
+
+- **GitHub Issues**: [提交问题](https://github.com/Tansuo2021/gemini-3-pro-image-preview/issues)
+- **Pull Requests**: [贡献代码](https://github.com/Tansuo2021/gemini-3-pro-image-preview/pulls)
+
+---
+
+<div align="center">
+
+**⭐ 如果这个项目对你有帮助，请给一个 Star！**
+
+Made with ❤️ by [Tansuo2021](https://github.com/Tansuo2021)
+
+</div>
