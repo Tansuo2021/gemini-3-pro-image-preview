@@ -216,11 +216,8 @@ function escapeHtml(text) { return text.replace(/[&<>"']/g, m => ({ '&': '&amp;'
         // 根据分辨率估算生成时间（秒）
         estimateTime(resolution, hasRefImages = false) {
             const baseTime = {
-                '1024x1024': 20,
                 '1K': 20,
-                '2048x2048': 45,
                 '2K': 45,
-                '4096x4096': 90,
                 '4K': 90
             };
             let time = baseTime[resolution] || 30;
@@ -1210,9 +1207,7 @@ function escapeHtml(text) { return text.replace(/[&<>"']/g, m => ({ '&': '&amp;'
 
                     const aspectRatio = document.getElementById('xhs-paint-ratio').value;
                     const quality = document.getElementById('xhs-paint-quality').value;
-                    let size = "1024x1024";
-                    if (quality === "2K") size = "2048x2048";
-                    else if (quality === "4K") size = "4096x4096";
+                    let size = quality;
 
                     const useStreaming = document.getElementById('stream-toggle')?.checked || false;
 
